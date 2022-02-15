@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>자바스크립트 오브젝트</title>
+  </head>
+  <body>
+    <h1>자바스크립트 객체 (object) : F12 개발자콘솔</h1>
+    <ul>
+      <li>
+        객체는 객체이름, 프로퍼티(property), 프로퍼티 값(property-value)로 구성
+      </li>
+      <li>객체 이름은 객체의 존재 구분을 위한 명칭</li>
+      <li>프로퍼티는 그 객체를 구성하는 특징들의 고유 명칭</li>
+      <li>프로퍼티 값은 고유명칭을 설명하는 값</li>
+    </ul>
+    <ol>
+      <li>
+        객체안의 프로퍼티에 익명함수를 정의하고 사용하면 그 함수는 메서드라고
+        부른다
+      </li>
+      <li>그 메서드의 이름은 프로퍼티의 이름으로 사용됨</li>
+    </ol>
+    <script>
+      const me = {
+        name: "Park",
+        age: 40,
+        addr: "Seoul",
+        isDevAvail: true,
+        "an jae youn": "hansome",
+        park_ki_tae: "Older",
+        avail: {
+          title: "javascript",
+          ver: "ES6+",
+          project: "Message App",
+          years: {
+            fisrt: 2011,
+            mid: "spring",
+            last: "AI",
+          },
+        },
+      };
+
+      console.log(me.name, me.age, me.addr, me.isDevAvail);
+      console.log(me.avail);
+      console.log(me.avail.title, me.avail.ver, me.avail.project);
+      console.log(me.avail.years);
+      console.log(
+        me.avail.years.fisrt,
+        me.avail.years.mid,
+        me.avail.years.last
+      );
+
+      console.log(me["name"]);
+      console.log(me["avail"]["title"]);
+
+      console.log(1, me.avail["title"]);
+
+      console.log(me["an jae youn"]);
+
+      console.log("--------------------");
+
+      me.name = "KIM";
+      console.log(me.name);
+
+      // object method
+      const you = {
+        name: "Lee",
+        age: 30,
+        getOlder: function () {
+          // method라고 불리운다 > 이름은 프로퍼티의 명칭을 공유
+          //   console.log(you.age + 1);
+          return you.age++; // 30
+          //   return ++you.age; // 31
+        },
+        addr: "Seocho",
+        getYounger: function () {
+          return --you.age;
+        },
+      };
+      // Postfix increment
+      let x = 3;
+      y = x++; // x:3, y:3
+
+      // y : 3
+      // x : 4
+
+      // Prefix increment
+      let a = 2;
+      b = ++a;
+
+      // a : 3
+      // b : 3
+
+      console.log(you.getOlder()); // 30
+      console.log(you.age); //31
+      console.log(you.getYounger()); //30
+      console.log(you.age); //30
+      console.log('-----------------------');
+      const theMusicianInSeoul = {
+          name: 'Jang',
+          age : 29,
+          introduce: function(n, a){
+              return `My name is ${n} and I am ${a} years old.`;
+          },
+          introSelf: function(){
+            return `My name is ${this.name} and I am ${this.age} years old.`;
+          }
+      }
+      console.log(theMusicianInSeoul.introduce('HONG', 32));
+      console.log(theMusicianInSeoul.introSelf());
+
+    </script>
+  </body>
+</html>

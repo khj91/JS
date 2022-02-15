@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>문자열 타입의 특징</title>
+  </head>
+  <body>
+    <h1>자바스크립트 문자열 타입의 특징: F12</h1>
+    <ul>
+      <li>문자는 길이를 판단할 수 있다</li>
+      <li>
+        문자열은 각 한개의 문자씩 판별할 수 있는 위치값(주소값, 인덱스)를 갖고
+        있다
+      </li>
+      <li>문자는 기본적으로 참조형 타입이므로 객체방식의 접근이 가능하다</li>
+      <li>문자타입과 관련된 메서드의 이해가 중요하다</li>
+      <li>이유는 웹의 구성요소 중 문자가 대부분이기 때문!!!</li>
+    </ul>
+    <script>
+      // escape : 문자화 시키는 연산자 (\)
+      let text = 'We are the so-called "Vikings" from the north.';
+      console.log(text);
+      text = "It's alright.";
+      console.log(text);
+
+      let test = "I my me mine \\ you your you yours";
+
+      // escape (b, f, n, r, t, v) : 문자를 특수한 기능을 구현하는 코드화 시킨다.
+      // \n (아래라인으로 내림)과 \t(탭키 효과: 일정간격 주기) 정도 알아두면 쓸일이 있다
+
+      console.log("--------------");
+      let x = "John";
+      let y = new String("John");
+      console.log(x, y);
+      console.log(x == y);
+      console.log(x === y);
+    </script>
+  </body>
+</html>

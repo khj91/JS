@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>undefined</title>
+</head>
+<body>
+    <h1>자바스크립트 undefined와 null : 개발자 콘솔(F12)을 확인하세요</h1>
+    <ul>
+        <li>undefined : 정의 되지 않은 모든 값, 함수의 리턴이 없는 것도 undefined!</li>
+        <li>값이 정의 되지 않았으므로 산술연산 불가</li>
+        <li>undefined와의 산술연산의 결과는 모두 undefined 이다 (null도 마찬가지)</li>
+        <li>null과 undefined의 비교연산은 값만 비교 했을 경우는 true를 리턴한다</li>
+    </ul>
+<script>
+    let x;
+    console.log('x-19:',x); // undefined
+
+    let y = x;
+
+    x = null;
+    console.log('x-24', x); // null
+    console.log('y-25', y); // undefined
+
+    x = y;
+    console.log('x-28', x); // undefined
+    console.log('-------------------------');
+    
+    x = undefined;
+    y = null;
+    
+    console.log(1,x == y); // true
+    console.log(2, x === y); // false
+    console.log(3, x == null); // true
+    console.log(4, x === null); // false 
+    console.log(5, x === undefined) // true
+    console.log(6, y == undefined); // true
+    console.log(7, y === undefined); // false
+    console.log(8, y === null); // true
+    
+    console.log('-------------------------');
+    function noReturn() {
+        console.log('안돌려줘어~');        
+    }
+
+    let result = noReturn(); // let result;
+    console.log(result);
+
+    // block scope
+
+    let var1 = 0;
+    function thisFunc(param1, param2) {
+        let var1 = 1; // local variable
+        param1 = 10, param2 = 20;
+        console.log(var1); // 1
+    }
+    var1 = 2;
+    console.log(var1); // 2
+</script>
+</body>
+</html>
