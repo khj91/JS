@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Template Print</title>
+<script>
+    function printInfo(name, age) {
+        let myInfo = `myName: ${myName}, myAge: ${myAge}`;
+        // console.log(myInfo);            
+    }
+
+    function getInfo(name, age) {
+        return `myName: ${myName}, myAge: ${myAge}`;
+    }
+</script>
+</head>
+<body>
+    <h1>자바스크립트 템플레이트를 활용한 출력 : 개발자 콘솔(F12)을 확인하세요</h1>
+<script>    
+    let myName = 'Park';
+    let myAge = 40;
+    // let myInfo = `myName: ${myName}, myAge: ${myAge}`;
+
+    // console.log('myName:', myName, ', myAge:', myAge);
+    // console.log('myName: ' + myName + ', myAge: ' + myAge);
+    // console.log(myInfo);
+
+    printInfo(myName, myAge);
+    // let result = getInfo(myName, myAge);    
+    // console.log(result);
+    console.log(getInfo(myName, myAge));
+
+    function getYourName() {        
+        return 'My name is Park';
+    }
+
+    console.log('너의 이름은 ? :' + getYourName());
+
+    function getTripleNumber(num) {
+        return num * num * num;
+    }
+    let result3 = getTripleNumber(3); //27
+    console.log('3의 세 제곱 : ', result3); // 27
+    console.log(`3의 세 제곱 : ${result3}`);
+    console.log(`3의 세 제곱 : ${getTripleNumber(3)}`);
+    function validYear(year) {
+        if (year > 1900 && year < 2022){
+            return '태어난 해가 정상적인 범위 안에 있습니다!';
+        }else {
+            return '태어난 해가 1900년 이전이거나 2021년 이후입니다.';
+        }
+    }
+
+    console.log(validYear(1990));
+    console.log(validYear(1899));
+
+</script>
+</body>
+</html>

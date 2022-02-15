@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>자바스크립트 변수</title>
+</head>
+<body>
+<h1>자바스크립트 변수 : 개발자 콘솔(F12)을 확인하세요</h1>
+<ul>
+    <li>특정한 자료값을 임시적으로 저장하는 위치, 장소, 개념, 코드, 상태</li>
+    <li>변하는 값을 주로 다룬다고 해서 변수 라고 함</li>
+    <li>자바스크립에서는 var, let 키워드를 변수 선언할 때 사용함</li>
+    <li>ES6 부터는 let 키워드 사용을 권장함</li>
+</ul>
+<script>
+    // 변수의 선언
+    let current_my_age; // snake notation
+    let currentMyAge; // camel notation (자바스크립트에서 권장하는 방식-가독성)
+    let currentmyage; // 대소문자 구분합니다. 위의 변수와 다른 존재
+
+    //let 1age; // 숫자사용은 가능하나 숫자로 시작 안됨
+    let myAge1;
+    let _myAge // 특수문자는 _ (under score) , $ (dollar)를 허용
+    // 하지만 $ 는 문법상 자주 사용되는 특수문자이므로 사용을 권장하지 않음
+
+    // 초기화 (변수가 최초로 값을 갖는 상태)
+    currentMyAge = 40; 
+
+    // 선언과 초기화 동시에~
+    let yourAge = 24;
+
+    // 변수를 사용하는 주의 사항들 (중요!)
+    // 1. 의미를 바로 알 수 있는 변수명 사용! 나쁜 예)crMAge;  추천) currMyAge
+    // 2. 변수명은 문자를 중심으로 구성하고 숫자는 가급적 반복의 경우에 사용!
+    // 나쁜 예) send2msg, java4lib, upd8 => 문자 중심으로 구성하시길~
+    // 3. 변수는 고정값이 될 가능성이 있으면 충분히 고민 후 상수(const)로 대입시킨다!
+
+    yourAge = 27;
+
+
+    yourAge = '이십칠';
+
+    yourAge = false;
+
+    yourAge = "why?"; //변수에 의미를 잃어버린 상태
+
+    // 여러분의 정보를 변수 선언(declaration) 및 초기화(initializing)를 해보세요
+    // ex) 이름, 나이, 주소, 전공, 취미, 특기, 이메일 등등등... 최소 5개 이상~
+    let myName = 'Park Kitae';
+    let myAge = 40;
+    let myAddr = 'Seoul';
+    let myMajor = 'Financial';
+    let myHobby = 'Base Ball';
+    let email = 'midaseye@naver.com';
+
+    // + 는 문자와 같이 사용하면 연결자(결합자)로 사용됨
+    // 숫자끼리는 정상적인 덧셈연산을 함
+    console.log('이름: '+myName);
+    console.log('나이:',myAge);
+    console.log('주소:' + myAddr);
+    console.log('취미:' , myHobby);
+    console.log('이메일:' + email);
+
+    // 커피숍의 메뉴의 정보(가격, 칼로리, 주첨가재료)를 변수로 선언한다면?
+    let americanoPrice = 4000;
+    let latteKcal = 5000;
+    let coldbrewRecipe = '커피추출물';
+    let banilaLatteSize = 'grande';
+    let americanoInfo;
+
+    console.log('-------------------------------------');
+    console.log(americanoPrice);
+    console.log(americanoPrice + latteKcal);
+    console.log('coldbrewRecipe:', coldbrewRecipe);
+    console.log('banilaLatteSize : '+ banilaLatteSize);
+    console.log('americanoInfo', americanoInfo);
+    
+    // 변수의 사용 목적
+    // 특정한 값이나 상태를 추후에 계속해서 사용할 가능성이 있다면
+    // 그 값에 쉽게 접근하여 연산(활용)을 이어갈 수 있도록 함
+
+    console.log('------------------------------------------------');
+    let num = 1000;
+    // const num = 1000; // 85번라인의 let으로 선언된 변수명과 중복됨 (중복선언 X)
+
+    // 상수선언 = 항상 같은 값을 갖도록 선언
+    // 최초 선언 및 초기화 후 값 변경 불가
+    const NUM = 1000;  
+
+    console.log(num);
+    console.log(num);
+    num = 100000; // 값을 재할당 가능
+    NUM = 100000; // 값을 재할당 불가능
+
+</script>
+</body>
+</html>
