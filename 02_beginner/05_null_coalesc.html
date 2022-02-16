@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nullish Coalescing Operator</title>
+</head>
+<body>
+<h1>Nullish Coalescing Operator : ES2020 부터 제공되는 연산자</h1>
+<ul>
+    <li>null or undefined를 판단하여 값을 대체 출력하는 연산자</li>
+</ul>
+<script>
+    // 좌측이 null or undefined이면 우측 값을 출력
+    // 좌측이 null or undefined이 아니면 그대로 좌측값 출력
+    console.log(null ??  alert("Nullish"));
+    console.log(undefined ?? "Coalescing");
+    console.log("" ?? 'Operator');
+    console.log(0 ?? 'Zero!');
+</script>
+</body>
+</html>

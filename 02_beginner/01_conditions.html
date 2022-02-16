@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conditions</title>
+  </head>
+  <body>
+    <h1>자바스크립트 조건문 : F12</h1>
+    <ol>
+      <li>if, else if , else, switch case</li>
+      <li>조건문의 조건은 반드시 boolean 값이어야 함</li>
+      <li>조건이 true 일때 실행영역으로 이동</li>
+      <li>조건문의 실행영역은 { }로 감싼다</li>
+      <li>
+        선택은 택일 이므로 조건의 구조가 매우 복잡하면 수행속도에 영향을 많이
+        준다
+      </li>
+      <li>중첩 조건문과 다중 조건은 다른 구조이다</li>
+    </ol>
+    <script>
+      let myName = "Park";
+      // 단일 선택지 if조건을 만족하면 실행영역을 수행
+      if (myName) {
+        console.log(`My name is ${myName}`);
+      }
+
+      let yourName;
+      // 다중 선택지 if조건을 만족하면 실행영역을 수행, 아니면 else 영역을 수행
+      if (myName && yourName) {
+        console.log(`My name is ${myName} and your name is ${yourName}`);
+      } else {
+        console.log(`One of name is empty`);
+      }
+
+      let hisName = "Kim";
+      let herName = "Huh";
+      // 다중 선택지
+      // if조건을 만족하면 실행영역을 수행, 아니면 else if 조건을 검사 후 만족하면 그 영역을 수행
+      // else if조건을 만족하지 않으면 최종 else 영역을 수행
+      if (myName && yourName) {
+        console.log(`My name is ${myName} and your name is ${yourName}`);
+      } else if (hisName && herName) {
+        console.log(`Both name are fullfilled`);
+      } else {
+        console.log(`One of name is empty`);
+      }
+      // if가 트루면 else if가 트루여도 실행 안한다!!!! (from 손필규)
+
+      if (0) {
+        console.log("여긴가?", "if");
+      } else if (0) {
+        console.log("여긴가?", "else if");
+      } else if (0) {
+        console.log("여긴가?", "else if");
+      } else if (0) {
+        console.log("여긴가?", "else if");
+      } else {
+        console.log("여기네!", "else");
+      }
+
+      if (0) {
+        console.log("여긴가?", "if");
+      }
+      if (0) {
+        console.log("여긴가?", "if");
+      }
+      if (0) {
+        console.log("여긴가?", "if");
+      }
+      if (0) {
+        console.log("여긴가?", "if");
+      }
+
+      if (true) {
+        console.log("Check - 1");
+        if (false) {
+          console.log("Check - 2");
+        } else {
+          console.log("Check - 3");
+          console.log("이곳은 if 안쪽에 또 if-else문의 else문을 실행한 것");
+        }
+        console.log("Check - 4");
+      }
+      console.log("-------------------------");
+      if (true) {
+        console.log("chk1");
+        if (true) {
+          console.log("chk2");
+          if (false) {
+            console.log("No1");
+          } else if (true) {
+            console.log("chk3");
+          } else {
+            console.log("No2");
+          }
+          console.log("chk4");
+        } else {
+          console.log("No3");
+          if (true) {
+            console.log("?");
+          } else {
+            console.log("?");
+          }
+        }
+        console.log("chk5");
+      }
+      console.log("finish");
+      console.log("-------------------------");
+      let now = 20;
+      let holiday = false;
+      let goGym = true;
+      if (now < 12) {
+        console.log("good morning");
+        if (holiday) {
+          console.log("Wow");
+        } else {
+          console.log("Do your best");
+        }
+      } else if (now > 12 && now < 19) {
+          console.log('Good Afternoon');
+          if(goGym){
+              console.log('Yes!');
+          }else {
+              console.log('Tired');
+          }
+      }else {
+          console.log('Go home hurry up');
+      }
+      console.log('time...........pass.......');
+      console.log('good night');
+    </script>
+  </body>
+</html>

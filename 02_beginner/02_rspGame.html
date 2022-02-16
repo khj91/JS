@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RSP Game</title>
+  </head>
+  <body>
+    <h1>가위 바위 보</h1>
+    <h3>가위, 바위, 보 중에 하나를 입력하세요</h3>
+    <input type="text" id="choice" />
+    <button type="button" id="btn">제출</button>
+    <script>
+      document.getElementById("btn").addEventListener("click", function () {
+        // 여러분의 입력값을 받아오는 코드
+        let myChoice = document.getElementById("choice").value;
+        // 컴퓨터가 1 ~ 3의 숫자를 랜덤으로 만들어주는 코드
+        let comChoice = Math.floor(Math.random() * 3) + 1;
+
+        // 컴퓨터가 1~3 중에 하나를 랜덤으로 만들어 줍니다
+        // 여러분이 입력한 정보와 컴퓨터가 입력한 정보를 이용해 가위바위보 게임을 만들어보세요
+        // 결과는 콘솔에 승리, 비겼음, 졌음의 의미를 출력하세요
+        function makeKorean(comNum) {
+          if (comNum == 1) { 
+            return "가위";
+          } else if (comNum == 2) {
+            return "바위";
+          } else {
+            return "보";
+          }
+        }
+        let comChoiceConverted = makeKorean(comChoice);
+        console.log(`나의 선택: ${myChoice}`);
+        console.log(`컴퓨터의 선택: ${comChoiceConverted}`);
+
+        if (myChoice == "가위") {
+          if (comChoiceConverted == "가위") {
+            console.log(`비겼습니다!`);
+          } else if (comChoiceConverted == "바위") {
+            console.log(`컴퓨터가 이겼습니다!`);
+          } else {
+            console.log(`내가 이겼네!`);
+          }
+        } else if (myChoice == "바위") {
+            if (comChoiceConverted == "가위") {
+                console.log(`내가 이겼네!`);
+          } else if (comChoiceConverted == "바위") {
+            console.log(`비겼습니다!`);
+          } else {
+            console.log(`컴퓨터가 이겼습니다!`);
+          }
+        } else {
+            if (comChoiceConverted == "가위") {
+                console.log(`컴퓨터가 이겼습니다!`);
+          } else if (comChoiceConverted == "바위") {
+            console.log(`내가 이겼네!`);
+          } else {
+            console.log(`비겼습니다!`);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

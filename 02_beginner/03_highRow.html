@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High Row</title>
+</head>
+<body>
+<h1>High Row Number</h1>
+<h3>0 ~ 99 의 번호를 입력하세요</h3>
+<input type="number" id="myNum" min="0" max="99">
+<button type="button" id="btn">확인</button>
+<script>
+    let comNum = Math.floor(Math.random()*100); // 0~99까지 숫자를 램덤으로 배정
+    let tries = 0;
+    document.getElementById('btn').addEventListener('click', function(){
+        
+        // 컴퓨터의 숫자를 내가 예측합니다!
+        // 내 숫자가 컴퓨터의 숫자보다 크면 > 더 작은수를 입력하세요!
+        // 내 숫자가 컴퓨터의 숫자보다 작으면 > 더 큰수를 입력하세요!
+        // 내가 시도한 누적횟수도 동시에 출력하기
+        // console.log(typeof myNum);
+        // console.log(comNum);
+        // if (comNum > parseInt(myNum)) {
+        //     console.log('더 큰 숫자를 입력하세요!');
+        // }else if(comNum < parseInt(myNum)) {
+        //     console.log('더 작은 숫자를 입력하세요!');
+        // }else{
+        //     console.log('맞추셨네요~!');            
+        // }
+        // console.log('------------------------');
+        // // ternary operator
+        // console.log(`${comNum == parseInt(myNum) ? '맞추셨네요~!' 
+        //         : comNum > parseInt(myNum) ? 
+        //         '더 큰 숫자를 입력하세요!' : '더 작은 숫자를 입력하세요!'}`);
+        function judge(cn) {
+            let c = parseInt(cn);
+            let m = parseInt(document.getElementById('myNum').value);
+            return c == m ? '맞추셨네요~!'
+                : c > m ? '더 큰 숫자를 입력하세요!'
+                : '더 작은 숫자를 입력하세요!';
+        }
+        console.log(judge(comNum));
+
+        tries++;
+        console.log(`시도 누적 횟수: ${tries}`);     
+        
+    });
+</script>
+</body>
+</html>
