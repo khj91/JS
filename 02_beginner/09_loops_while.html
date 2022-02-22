@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>반복문 while</title>
+</head>
+<body>
+<h1>자바스크립트 반복문 while(boolean): F12</h1>
+<ul>
+    <li>while의 구조는 시작값, 반복유지 조건, 실행영역으로 이루어짐</li>
+    <li>반복유지 조건은 if문의 조건과 같은 boolean 타입으로 구성</li>
+    <li>while은 주로 반복의 횟수를 정확하게 정하지 못하거나 정할 필요가 없을 때 사용함</li>
+    <li>do while과의 차이는 while은 조건부 실행, do while은 선실행 후 조건부합 검사</li>
+    <li>조건이 true일때 계속 반복, false이면 반복을 멈춤(실행영역을 벗어남)</li>
+</ul>
+신우씨의 대답 : <input type="text" name="" id="und">
+<button type="button" id="btn">대답하기</button>
+<script>
+    let i = 1;
+    // print 1 to 10 
+    while(i < 11){
+        console.log(i++);
+    } // 현재의 반복형태는 for문을 사용하는 것이 더 바람직함
+
+    let j = 0;
+    // print 1 to 10 
+    while(j < 10){
+        console.log(++j);
+    } // 현재의 반복형태는 for문을 사용하는 것이 더 바람직함
+
+    let flag = true;
+    let sum = 0;
+    let num = 1;
+
+    while(flag){        
+        sum += num; // sum = sum + num
+        if(sum >= 1000){
+            flag = false;
+        }
+        console.log(num, '>',sum);
+        num++;
+    }
+    console.log('-----------');
+    do {
+        // 선실행 후 조건검사
+        sum += num;
+        if(sum > 2000){
+            flag = false;
+        }
+        console.log(num, '>', sum);
+        num++;
+    }while(flag);
+
+    console.log('------------------');
+
+    let flag2 = false;
+    
+    document.getElementById('btn').addEventListener('click',function () {        
+        do {
+            console.log('신우씨의 do-while문 이해하기~!');
+            console.log('이해하셨어요?');
+            let ans = document.getElementById('und').value;
+            if(ans == 'yes') {
+                flag2 = false;
+                console.log('이해하신것을 축하합니다~');
+            }
+            console.log('확인 하고 싶은 라인!');
+            debugger;
+        }while(flag2);
+    }); 
+</script>
+<h3>원하는 숫자의 2 ~ 9 단까지 출력하기</h3>
+숫자 입력 <input type="number" name="" id="num">
+<button type="button" id="btn2">결과 출력하기</button>
+<script>
+    // 숫자를 입력하면 그 숫자의 2 ~ 9까지 곱한 결과를 출력해보기
+    document.getElementById('btn2').addEventListener('click', function () {
+        let num = parseInt(document.getElementById('num').value);
+
+        let i = 2;
+        while(i < 10){
+            console.log(`${num} * ${i} = ${num * i}`);
+            i++;
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>while 정복하기</title>
+</head>
+<body>
+<h1>while 연습하기 : F12</h1>
+<ol>
+    <li>1 ~ 100 이하의 홀수를 모두 출력한 후 그 수들의 합을 출력 해보세요</li>
+    <li>임의의 숫자 2개(a, b)를 받아 a의 b 제곱을 구해보세요</li>
+    <li>정수 n을 입력받아 n의 약수를 모두 출력하고 총 몇개의 약수가 있는지 출력 해보세요</li>
+    <li>
+        <ul>
+            <li>3자리의 양의 정수 1개를 입력받기 : s</li>
+            <li>크기가 다른 1자리의 양의 정수 2개를 입력받기 (x, y)</li>
+            <li>s안의 x와 y의 배수 갯수 구하기</li>
+        </ul>
+    </li>
+</ol>
+<script>
+let n = 120;
+let h = 0;
+let cnt = 0;
+while(h < n+1) {
+    if(n % h == 0){
+        cnt++;
+    }
+    h++;
+}
+console.log(cnt);
+/* // 4. 효율성을 생각하여 만드는 방식
+    let o = 100000000;
+    let t = 16;
+    while(o > 0){
+        if(o % t == 0){
+            t = Math.floor(o / t);
+            break;
+        }
+        o--;
+    }
+    console.log(t);
+// 4. 정수 s안의 정수x,y의 배수 갯수 구하기
+    let s = 10000;
+    let x = 3;
+    let y = 5;
+    let m = 1;
+    let cnt_x = 0;
+    let cnt_y = 0;
+    let cnt_xy = 0;
+
+    while (s >= m) {
+        if(m % x == 0){
+            cnt_x++;
+        } 
+        if(m % y == 0){
+            cnt_y++;            
+        }
+        if(m % x == 0 && m % y == 0){
+            cnt_xy++;
+        }
+        m++;
+    }
+    console.log(`x의 배수 개수: ${cnt_x}개`);
+    console.log(`y의 배수 개수: ${cnt_y}개`);
+    console.log(`x,y의 공배수 개수: ${cnt_xy}개`);
+
+// 1. 1 ~ 100 이하의 홀수를 모두 출력한 후 그 수들의 합을 출력
+    let i = 0; 
+    let oddSum = 0;
+    while (i < 101) {
+        if (i % 2 == 1) {
+            console.log(`현재 홀수 번호 : ${i}`); // ES6 부터는 템플레이팅을 권장함
+            console.log('현재 홀수 번호 :', i);
+            console.log('현재 홀수 번호 :' + i);
+            oddSum += i; // oddSum = oddSum + i
+        }
+        i++;
+    }
+    console.log(`100 이하의 홀수들의 합: ${oddSum}`);
+
+    // 2. a의 b제곱을 구하라
+    let a = 21;
+    let b = 2;
+    let j = 0;
+    let flag = true;
+    let result = 1;
+    while (flag) {
+        result = result * a; // result *= a;
+        if(j == 1) {
+            flag = false;
+        }
+        j++;
+    }
+    console.log(`${a}의 ${b}제곱은 ${result} 입니다`);
+    
+    let k = 0;
+    let result2 = 1;
+    while (k < b) {
+        result2 *= a;
+        k++;
+    }
+    console.log(`${a}의 ${b}제곱은 ${result2} 입니다`);
+    
+    // 3. n의 약수를 모두 출력하고 총 몇개의 약수가 있는지 출력
+    let n = 120;
+    let h = 0;
+    let cnt = 0;
+    while (h < n + 1) {
+        if(n % h == 0){
+            cnt++;
+            console.log(`${n}의 약수 : ${h}`);
+        }
+        h++;
+    }
+    console.log(`${n}의 약수의 총 갯수는 ${cnt} 개 입니다.`); */
+</script>
+</body>
+</html>
