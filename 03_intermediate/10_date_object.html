@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>날짜와 시간</title>
+</head>
+<body>
+<h1>자바스크립트 날짜와 시간 : F12</h1>
+<ul>
+    <li>Date() 객체를 인스턴스화 하면 현재 순간의 날짜와 시간을 리턴한다</li>
+    <li>출력 형식이 실생활에서 사용하는 일반적인 상태가 아니므로 변환이 필요하다</li>
+    <li>Date.now()는 오래전부터 사용한 오늘날짜의 정보를 리턴(ES5 부터 사용)</li>
+    <li>날짜와 시간은 데이터의 처리와 관련된 날짜,시간 정보 기록에 많이 사용</li>
+    <li>또한 소요기간, 소요시간 등 측정과 관련되서 많이 사용</li>
+</ul>
+<script>
+    let todayNow = new Date();
+    console.log(Date.now());
+    console.log((new Date()).getMilliseconds());
+    console.log(todayNow.getFullYear());
+    console.log(todayNow.getMonth()+1);
+    console.log(todayNow.getDate());
+    console.log(todayNow.getHours());
+    console.log(todayNow.getMinutes());
+    console.log(todayNow.getSeconds());
+    console.log(todayNow.getMilliseconds());
+    console.log(todayNow.getDay()); // 0:Sunday
+    console.log(todayNow.getTime());
+
+    let now = new Date();
+    let past = new Date("1997-01-01T12:11:30");
+    console.log(now);
+    console.log(past);    
+    console.log(now - past);
+    let diff = now - past;
+    console.log(((((diff/1000)/60)/60)/24)/365);
+</script>
+</body>
+</html>

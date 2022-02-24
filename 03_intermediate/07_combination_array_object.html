@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>배열과 객체의 조합</title>
+</head>
+<body>
+<h1>자바스크립트 객체와 배열의 조합 : F12</h1>
+<ul>
+    <li>배열의 순환 탐색 방법 : Standard For, For of, forEach</li>
+    <li>객체의 순환 탐색 방법 : For in, forEach</li>
+</ul>
+<script>
+    const memberObject = {
+        name: 'Park',
+        age: '40',
+        famous: 10,
+        blood: 'O',
+        favors : ['baseball', 'basketball', 'game', 'movie', 'etc...']
+    };
+
+    const people = [
+        memberObject, memberObject, memberObject, memberObject
+    ];
+    console.log(memberObject.name);
+    console.log(memberObject['name']);
+    console.log('==============')
+    
+    for (let key in memberObject) { 
+        // key > 'name', 'age', 'famous', 'blood'
+        console.log(`${key} > ${memberObject[key]}`); //memberObject.key X
+    }
+    // memberObject의 내용을 for in, for of를 활용하여 모두 출력해 보세요
+    console.log('==============')
+    
+    for (const key in memberObject) {
+        console.log(`${key} > ${memberObject[key]}`);
+        if (key == 'favors') {
+            // let favors_arr = memberObject[key];
+            console.log(memberObject[key]);
+            for (let elem of memberObject[key]) {
+                console.log(elem);
+            }
+        }
+    }
+
+</script>
+</body>
+</html>
