@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>배열 문제</title>
+</head>
+<body>
+<h1>24절기 배열의 문제를 랜덤으로 출제하여 맞추기</h1>
+<ul>
+    <li>맞추면 정답 출력</li>
+    <li>틀리면 1번째 절기는 입춘입니다</li>
+</ul>
+<button type="button" id="quizBtn">문제 출제</button>
+<h1 id="quiz"></h1>
+<input type="text" id="ans">
+<button type="button" id="ansBtn">정답 확인</button>
+<h1 id="result"></h1>
+<script>
+    let quizIndexArr = [];
+    let ansHistory = [];
+    function makeQuiz(baseArr) {
+        let rIdx = Math.floor(Math.random()*baseArr.length);
+        document.getElementById('quiz').innerText = `${rIdx + 1} 번째 절기는 무엇입니까?`;
+        quizIndexArr.push(rIdx);
+    }
+
+    let seasonal = [
+        '입춘', '우수', '경칩', '춘분', '청명', '곡우', '입하',
+        '소만', '망종', '하지', '소서', '대서',
+        '입추', '처서', '백로', '추분', '한로', '상강', '입동',
+        '소설', '대설', '동지', '소한', '대한'
+    ];
+    document.getElementById('quizBtn').addEventListener('click',event => makeQuiz(seasonal));
+
+    document.getElementById('ansBtn').addEventListener('click', function () {
+        let myAns = document.getElementById('ans').value;
+        if (myAns == seasonal[quizIndexArr[quizIndexArr.length-1]]) {
+            document.getElementById('result').innerText = '정답입니다';
+            ansHistory.push(true);
+        }else {
+            let corrAns = `${quizIndexArr[quizIndexArr.length-1]+1} 번째 절기는 ${seasonal[quizIndexArr[quizIndexArr.length-1]]} 입니다`;
+            document.getElementById('result').innerText = corrAns;
+            ansHistory.push(false);
+        }
+        console.log(quizIndexArr);
+        console.log(ansHistory);
+        // document.getElementById('result').innerText = 
+        // myAns == seasonal[quizIndexArr[quizIndexArr.length-1]] ? '정답입니다' 
+        // : `${quizIndexArr[quizIndexArr.length-1]+1} 번째 절기는 ${seasonal[quizIndexArr[quizIndexArr.length-1]]} 입니다`; 
+    });
+
+</script>
+</body>
+</html>

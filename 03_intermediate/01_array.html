@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>배열~!</title>
+</head>
+<body>
+<h1>자바스크립트 배열(Array) : F12</h1>
+<ul>
+    <li>자바스크립트 배열은 유동성이 좋은 배열이다</li>
+    <li>인덱스 번호는 0번 부터 시작</li>
+    <li>문자데이터와 달리 각 요소를 수정, 삭제 할 수 있다</li>
+    <li>standard for문 이외에 for of 라는 전용 for문을 활용할 수 있다</li>
+    <li>배열은 데이터타입이 object이지만 배열 전용 객체가 존재함</li>
+    <li>배열 또한 많은 내장 메서드를 갖고 있어 관리가 용이하게 설계되어 있음</li>
+</ul>
+<script>
+    let arr_1 = []; // 리터럴 배열 생성 연산자
+    let arr_2 = ['Kim', 'Lee', 'Park']; // 같은 데이터 타입 저장이 기본
+    // 데이터의의 모음이므로 복수형의 변수 이름을 사용할 것을 권장
+    let members = ['김아연', '김태형', '김호중', '주혁중', '손필규', '임정민'];
+
+    // 연관배열(유사배열) 배열타입이 아님 > 배열관련 메서드를 사용할 수 없음
+    let arr_3 = [1, true, '최', undefined, {k: 'value',}]; 
+    let obj_1 = {k1: 'val1', k2: 'val2',};
+
+    let str_1 = 'Kim,Lee,Park';
+
+    let sums = [arr_1, arr_2, arr_3]; // 기본형 배열
+
+    console.log(str_1.charAt(0));
+    console.log(str_1[0]);
+
+    console.log(arr_2[0]);
+    console.log(arr_1[0]);
+    console.log(sums[0]==arr_1); // undefined == undefined
+    
+    console.log(sums[1][1]); // 인덱스 번호를 추적해서 내부 배열에 접근하는 방법
+    console.log('--------------------------');
+    for (let i = 0; i < sums.length; i++) {
+        for (let j = 0; j < sums[i].length; j++) {
+            console.log(sums[i][j]);
+        }
+    }
+    console.log('--------------------------');
+    console.log(arr_3[arr_3.length - 1]);
+
+    console.log('--------------------------');
+
+    // 일반 반복문
+    for (let i = 0; i < arr_3.length; i++) {
+        console.log(arr_3[i]);        
+    }
+    console.log('--------------------------');
+
+    // 배열 전용 반복문
+    for (let elem of arr_3) {
+        console.log(elem);
+    }
+    console.log('------------For Quiz--------------');
+    // 내일의 6시, 12시, 18시, 21시 기온을 검색해서 배열로 저장하세요
+    // 그 온도를 미국 친구에게 알려주고 싶습니다
+    // 섭씨온도를 화씨온도로 변경하여 새로운 배열에 저장한 후 섭씨: 화씨 포맷으로 출력해주세요
+    let today_c = [24.3, 26.4, 26.8, 22.2];
+    let today_f = []; // length = 0
+
+    for (let c of today_c) {
+        console.log(today_f.length);
+        today_f[today_f.length] = (180 / 100) * c + 32;        
+    }
+    console.log(today_f);
+
+    console.log('------------For Quiz 2--------------');
+    let today_c2 = [21.3, 24.4, 26.8, 20.2];
+    for (let i = 0; i < today_c2.length; i++) {        
+        today_f[i] = (180 / 100) * today_c2[i] + 32;
+    }
+    console.log(today_f);
+</script>
+</body>
+</html>
