@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Set</title>
+</head>
+<body>
+<h1>자바스크립트 SET : F12</h1>
+<ul>
+    <li>동일한 값은 한 번만 저장하는 객체</li>
+    <li>키의 개념은 있으나 물리적인 키의 구현은 되어있지 않다</li>
+    <li>value 값이 곧 키의 역할을 하기 때문에 중복을 허용하지 않는 구조</li>
+    <li>length 대신 size라는 프로퍼티를 사용하여 크기를 알 수 있음</li>
+    <li>forEach 메서드로 순환 탐색 가능하며 객체타입이므로 new, instanceof 를 사용함</li>
+    <li>전용 메서드는 add(), delete(), has(), clear(), keys(), values(), entries()</li>
+    <li>배열을 통해 객체를 생성할 수 있음</li>
+</ul>
+<script>
+    let arr = [];
+    for (let i = 0; i < 100; i++) {
+        let rnum = Math.floor(Math.random()*100)+1;
+        arr.push(rnum);
+    }    
+    console.log(arr); 
+    console.log(arr.length); // 100
+
+    let newSet = new Set(arr);
+    console.log(newSet);
+    console.log(newSet.size); // ?
+
+    // 중복되지 않는 숫자 6개 만들기 - 로또 번호 선택 방식
+    // 추상 : 중복되지 않는 숫자가 담길 set
+    function makeLotto() {
+        let lottoSet = new Set();    
+        while(lottoSet.size < 6){
+            let rnum = Math.floor(Math.random()*45)+1;
+            lottoSet.add(rnum);
+        }
+        return lottoSet;
+    }
+    // 추상 : 6개를 담는 기능
+
+
+    // 추상 : 랜덤한 숫자를 생성하는 기능
+
+    // 추상 : 완성된 set을 출력하는 기능
+    console.log(makeLotto());
+    let sortLotto = Array.from(makeLotto().values());
+    // let sortLotto = [...(makeLotto().values())]; //spread literal operator
+
+    sortLotto.sort(function (a, b) {
+        return a - b;        
+    });
+    console.log(sortLotto);
+
+</script>
+</body>
+</html>

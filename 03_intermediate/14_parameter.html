@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>파라미터, 아규먼트의 활용</title>
+</head>
+<body>
+<h1>자바스크립트 파라미터, 아규먼트의 활용 : F12</h1>
+<ul>
+    <li>파라미터 : 함수나 메서드가 외부에서 데이터를 받아 내부에서 사용할 매개변수</li>
+    <li>아규먼트 : 외부에서 함수나 메서드에게 전달하려는 데이터들</li>
+</ul>
+<script>
+    // 옵셔널 파라미터 : 반드시 일반 파라미터 뒤에 있어야 함!
+    function myFunc(a, b=100) {
+        return a * b;
+    }
+    console.log(myFunc(2));
+    console.log('-------------------------');
+    // arguments 키워드 : 내부에서 사용할 파라미터를 배열객체처럼 활용가능한 통합 키워드
+    function myFunc2() {
+        return `${arguments.length}개의 파라미터 곱은 ${arguments[0] * arguments[1]} 입니다`;
+    }
+    console.log(myFunc2(2, 5));
+    console.log('-------------------------');
+    
+    // rest parameter
+    function myFunc3(a, b, ...others) {
+        console.log(`첫 파라미터: ${a}`);
+        console.log(`두번째 파라미터: ${b}`);
+        console.log(`나머지는 ${others}`);
+        for (let arg of others) {
+            console.log(`나머지 중 하나: ${arg}`);
+        }        
+    }
+    console.log(myFunc3('a', 'b', 'c', 'd', 'e', 'f', 'g'));
+    console.log('-------------------------');
+</script>
+</body>
+</html>

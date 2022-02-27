@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Constructor</title>
+  </head>
+  <body>
+    <h1>자바스크립트 Constructor : F12</h1>
+    <ul>
+      <li>OOP 개념에서 반드시 언급되는 개념</li>
+      <li>생성자라는 용어로 풀이되며, 객체 생성을 담당한다라는 의미</li>
+      <li>
+        자바스크립트는 객체를 생성하는 방식이 다양해서 생성자를 사용하지 않아도
+      </li>
+      <li>객체 활용이 용이하므로 다른 언어에 비해서 덜 강조됨</li>
+    </ul>
+    <script>
+      // 객체생성 방식 : literal > 문자표현식 연산, 메서드
+      function createMember(email, age) {
+        // Factory Function
+        const member = {
+          email, //email: email,
+          age, //age: age,
+          introduce() {
+            console.log(`${email} and ${age}`);
+          },
+          /* introduce: function(){
+                  console.log(`${email} and ${age}`);
+              } */
+        };
+        return member;
+      }
+      let member1 = createMember("kim@kim.com", 30);
+      let member2 = createMember("lee@lee.com", 22);
+
+      // Constructor Function
+      function MakeGrade(email, age) {
+        // 함수의 이름이 대문자로 시작! (객체는 대문자로 표기)
+        this.email = email;
+        this.age = age;
+        this.make_grade = function () {
+          console.log(`${(age / 10).toPrecision()}`);
+        };
+      }
+      let grade1 = new MakeGrade('park@park.com', 40);
+      let grade2 = new MakeGrade('jung@jung.com', 30);
+    </script>
+  </body>
+</html>

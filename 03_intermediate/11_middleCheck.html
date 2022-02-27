@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>날짜 시간 연산 연습</title>
+  </head>
+  <body>
+    <h1>자바스크립트 날짜와 시간 연산</h1>
+    <ul>
+      <li>두 개의 input 태그를 date 타입으로 만든다</li>
+      <li>버튼을 제작하여 클릭을 하면 두개의 input 태그의 값을 받아온다</li>
+      <li>두 날짜의 차이를 계산하여 몇 일 차이가 나는지 h3태그에 출력한다</li>
+    </ul>
+    <input type="date" id="begin" />
+    <input type="date" id="finish" />
+    <button type="button" id="btn">몇일차이?</button>
+    <h3 id="result"></h3>
+
+    <button type="button" id="for">For + If 문</button>
+    <button type="button" id="arr">Array + reduce 문</button>
+    <script>
+      document.getElementById("btn").addEventListener("click", function () {
+        let begin = document.getElementById("begin").value;
+        let finish = document.getElementById("finish").value;
+        console.log(begin, typeof begin);
+
+        let beginDate = new Date(begin);
+        let finishDate = new Date(finish);
+        console.log(finishDate - beginDate);
+
+        let diff = (finishDate - beginDate) / 86400000;
+        // let diff = (finishDate - beginDate) / (24*60*60*1000);
+        document.getElementById("result").innerText =
+          diff + "일 차이가 납니다!";
+      });
+      document.getElementById("for").addEventListener("click", function () {
+        let sum = 0;
+        let start = Date.now();
+        console.log(start);
+        for (let i = 1; i <= 10000000; i++) {
+          if (i % 2 == 0) {
+            sum += i;
+          }
+        }
+        let end = Date.now();
+        console.log(end);
+        console.log(end - start);
+      });
+
+      document.getElementById("arr").addEventListener("click", function () {
+        let arr = [];
+        let start2 = Date.now();
+        console.log(start2);
+        for (let i = 1; i <= 10000000; i++) {
+          arr.push(i);
+        }
+        arr.reduce(function (total, elem) {
+          return elem % 2 == 0 ? total + elem : total;
+        });
+        let end2 = Date.now();
+        console.log(end2);
+        console.log(end2 - start2);
+      });
+      let today = new Date();
+      console.log(`${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`);
+      todayForm = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+      console.log(todayForm);
+    </script>
+  </body>
+</html>

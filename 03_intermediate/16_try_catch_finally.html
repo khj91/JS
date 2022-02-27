@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>예외 처리</title>
+</head>
+<body>  
+<h1>자바스크립트 예외처리 : F12</h1>
+<ul>
+    <li>코드가 실행되는 블럭에 예외가 발생할 수 있는 상황을 별도처리 할 수 있게 하는 기법</li>
+    <li>try{} 블럭에 실행코드를 작성</li>
+    <li>catch(error){} 블럭에 예외가 발생되면 어떻게 처리할 것인지 처리코드 작성</li>
+    <li>finally{} : try, catch의 실행에 상관없이 마지막에 무조건 실행하는 영역</li>
+    <li>throw : 강제로 예외 상황을 발생시키는 키워드</li>
+</ul>
+<script>
+    try {        
+        console.log('예외가 발생할 수 있는 영역이란 ?'); //실행
+        throw TypeError(); //에러 발생했으므로 catch로 이동
+        console.log('정상적인 코드로 판단하고 작성하였지만');
+        console.log('뜻하지 않는 에러가 발생할 수 있는 가능성이 있는 코드들이 있는 영역');
+    } catch (err) {
+        console.log('예외가 발생하면 try 구문이 멈추고 이 영역으로 프로세스가 진행됨'); //실행
+        console.log(err.toString()); //실행
+        try {
+            console.log('에러가 발생하였으니 여기를 실행합시다'); //실행
+            throw ReferenceError(); // 에러 발생했으므로 catch로 이동
+            console.log('예외처리 잘 되고 있나요?');
+        } catch (error) {
+            console.log('뭔가 또 문제가 발생한 것 같습니다!'); // 실행
+        }
+    } finally {
+        console.log('예외 발생 여부에 관계없이'); //실행
+        console.log('무조건 실행되는 영역입니다');//실행
+    }
+</script>
+</body>
+</html>

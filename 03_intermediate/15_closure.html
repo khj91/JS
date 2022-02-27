@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Closure</title>
+</head>
+<body>
+<h1>자바스크립트 클로져 : F12 </h1>
+<ul>
+    <li>self-invocation을 한 함수의 리턴값을 변수에 할당</li>
+    <li>리턴을 익명함수로 선언하면 변수는 그 익명함수를 리턴 받게 됨</li>
+    <li>변수명에 함수를 실행하는 () 연산을 하면 리턴으로 받은 함수만 실행되고</li>
+    <li>self-invocation이 되었던 함수는 메모리에 상주한 상태로 대기하게 됨</li>
+    <li>부모 함수의 실행상태를 대기 시키고 닫는다(폐쇄)는 의미로 클로져라고 부름</li>
+</ul>
+<script>
+    let rnum = 0;
+    function makeRandom(num) {
+        debugger;
+        return Math.floor(Math.random*num)+1;
+    }
+    let myNum = makeRandom(100);
+    debugger; // breakpoint
+    console.log(myNum);
+    myNum = rnum;
+    console.log('check');
+    debugger;
+    console.log('====================');
+    // closure
+    let getMyNum = (function () { 
+        const myNum = 10; // 외부에서 접근 및 변경 절대 불가
+        // 외부에서 접근 및 변경 절대 불가
+        let result = myNum * (Math.floor(Math.random()*100)+1);
+        return function () {            
+            return result;
+        };
+    })();
+    console.log(getMyNum.toString());
+</script>
+</body>
+</html>

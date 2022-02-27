@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화살표 함수</title>
+</head>
+<body>
+<h1>자바스크립트 화살표 함수 : F12</h1>
+<ul>
+    <li>함수표현식을 더 간단하게 => (화살표) 지시자를 사용하여 코드량을 줄임</li>
+    <li>가독성이 낮지만 최근 많이 사용되는 추세</li>
+    <li>변수명, 파라미터, 리턴의 형태만을 가지고 함수 표현식을 구성할 수 있음</li>
+</ul>
+<script>
+    let makeSum = function (a, b) {return a + b;};
+    console.log(makeSum(2, 3));
+
+    let makeSumArrow = (a, b) => a + b;
+    console.log(makeSumArrow(2, 3));
+
+    let makeSumArrow2 = (a, b) => {
+        a*=2;
+        b*=3;
+        return a +b;
+    };
+    let powerNum = num => num*num;
+    console.log(powerNum(10));
+
+    let getJob = () => {return {job: '소프트웨어 엔지니어'};};
+    console.log(getJob().job);
+
+    let getJob2 = () => ({job: '소프트웨어 엔지니어'});
+    console.log(getJob2().job);
+
+    let sumNums = (a, b, ...etc) => {
+        // console.log(arguments.toString()); //error
+        console.log(a, b, etc);
+    }
+    sumNums(1,2,3,4,5);
+
+    let sumNums2 = (a, b, c=a+b) => {
+        console.log(a, b, c);
+    }
+    sumNums2(10, 50);
+</script>
+<button type="button" id="btn">버튼을 클릭해보자</button>
+<button type="button" id="btn2" onclick="myFunction();">버튼을 또 클릭해보자</button>
+<script>
+    document.getElementById('btn').addEventListener('click', () => {
+        console.log('버튼을 클릭하셨군요~');
+    });
+    document.getElementById('btn2').onclick = () => {
+        console.log('버튼을 또 클릭하셨군요');
+    }
+</script>
+</body>
+</html>
