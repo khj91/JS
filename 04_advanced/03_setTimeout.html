@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>setTimeout()</title>
+</head>
+<body>
+    <button type="button" id="tryIt">Try it</button>
+    <button type="button" id="stopIt">Stop it</button>
+<script>
+    let timeObj;
+    document.getElementById('tryIt').onclick = () => {
+        timeObj = setTimeout(myFunction, 3000);
+    };
+    document.getElementById('stopIt').onclick = () => {
+        clearTimeout(timeObj);
+    };
+    function myFunction() {
+      alert("Hello");
+    }
+</script>
+</body>
+</html>

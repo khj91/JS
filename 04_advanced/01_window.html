@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOM - Window</title>
+</head>
+<body>
+<h1>BOM - window : F12</h1>
+<button type="button" id="btn">과거에 사용했던 팝업창 열기</button>
+<script>
+    // window.alert('window객체는 전역객체여서 생략이 가능하다');
+    // alert('이렇게 사용해도 무방하다');
+    console.log(window.innerWidth,window.innerHeight);
+    document.getElementById('btn').onclick = () => {
+        window.open("", "PopupWin", "width=500,height=600");
+    }
+    console.log(window.screen.availHeight, window.screen.availWidth);
+</script>
+</body>
+</html>

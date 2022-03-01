@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOM - location</title>
+</head>
+<body>
+<h1>BOM - location</h1>
+<ul>
+    <li>a href="url" 를 활용하여 페이지 이동과 같은 효과</li>
+    <li>주소표시줄을 location이라고 생각하면 됨</li>
+    <li>주소표시줄에 target url을 입력하여 페이지 이동을 작동시키는 원리</li>
+</ul>
+<button type="button" id="btn">location.href=?</button>
+<button type="button" id="btn2">location.replace();</button>
+<button type="button" id="btn3">Navigator Object</button>
+<ol id="ol"></ol>
+<script>
+    document.getElementById('btn').onclick = ()=> {
+        location.href = "https://www.naver.com";        
+    };
+    document.getElementById('btn2').onclick = ()=> {
+        // 직전 주소값을 덮어쓰기 하는 원리 > 직전 주소값이 기록이 안됨
+        location.replace("https://www.naver.com");        
+    };
+    document.getElementById('btn3').onclick = ()=>{
+        const ol = document.getElementById('ol');
+        for (const key in window.navigator) {
+            let li = document.createElement('li');
+            li.innerText = `${key} : ${window.navigator[key]}`;
+            ol.appendChild(li);
+        }
+    };
+
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>setInterval()</title>
+<style>h1 {color: white; height: 300px;}</style>
+</head>
+<body onload="changeColor();">
+<h1 id="h1">setInterval()은 주기적 실행</h1>
+<button type="button" id="start">배경색 변경 시작</button>
+<button type="button" id="finish">배경색 변경 종료</button>
+<script>
+    let intervalObj;
+    function changeColor() {
+        intervalObj = setInterval(flashColor, 500);
+    }
+    function flashColor() {
+        let elem = document.getElementById('h1');
+        elem.style.color = (elem.style.color == 'white' ? 'blue' : 'white');
+        elem.style.backgroundColor = (elem.style.backgroundColor == 'red' ? 'yellow': 'red');
+    }
+    
+    function stopFlashColor() {
+        clearInterval(intervalObj);
+    }
+    document.getElementById('finish').addEventListener('click', stopFlashColor);
+    document.getElementById('start').addEventListener('click', changeColor);
+</script>
+</body>
+</html>
