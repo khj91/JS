@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>getElements</title>
+</head>
+<body>
+<h1>DOM getElements</h1>
+<ul id="ul">
+    <li class="odd">first</li>
+    <li class="even">second</li>
+    <li class="odd">third</li>
+    <li class="even">fourth</li>
+</ul>
+<h3>Result : <span></span></h3>
+<a href="">네이버 링크 열기</a>
+<script>
+    // document.querySelector('a').href = 'https://www.naver.com';
+    // document.querySelector('a').target = '_blank';
+    let attrs = {
+        attrName: 'target',
+        attrValue: '_blank'
+    }
+    document.querySelector('a').setAttribute(attrs.attrName, attrs.attrValue);
+
+    let ul = document.getElementById('ul');
+    console.log(ul);
+    console.log(typeof ul);
+    console.log(ul instanceof HTMLUListElement);
+    let lis = document.getElementsByTagName('li');
+    console.log(lis);
+    let odd = document.getElementsByClassName('odd');
+    console.log(odd);
+
+    let even = document.querySelectorAll('.even');
+    console.log(even);
+
+    let ul2 = document.querySelector('#ul');
+
+    let li = document.querySelector('ul > li:first-child');
+    console.log(li);
+    console.log(li instanceof HTMLLIElement);
+    document.write('<hr>');
+    document.write(new Date());
+</script>
+</body>
+</html>

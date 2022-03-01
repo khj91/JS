@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>폼 태그 컨트롤</title>
+  </head>
+  <body>
+    <h1>DOM 폼 태그 관련 속성 컨트롤</h1>
+    <ul>
+      <li>input, select, textarea 태그들의 속성을 컨트롤 할 수 있다</li>
+      <li>input의 value들의 CRUD</li>
+      <li>radio, checkbox의 선택여부</li>
+      <li>select의 option select 값 가져오기 등</li>
+      <li>데이터의 validation에 필요한 폼태그들의 속성에 대한 공부가 중요함</li>
+    </ul>
+    <form action="myserver.php" name="exForm">
+      <div class="mb-3 mt-3">
+        <label for="email" class="form-label">Email:</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Enter email"
+          name="email"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="pwd" class="form-label">Password:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="pwd"
+          placeholder="Enter password"
+          name="pswd"
+        />
+      </div>
+      <div class="form-check mb-3">
+        <div class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="check1"
+            name="option1"
+            value="something"
+            checked
+          />
+          <label class="form-check-label" for="check1">Option 1</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="check2"
+            name="option2"
+            value="something"
+          />
+          <label class="form-check-label" for="check2">Option 2</label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" disabled />
+          <label class="form-check-label">Option 3</label>
+        </div>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="comment">Comments:</label>
+        <textarea
+          class="form-control"
+          rows="5"
+          id="comment"
+          name="text"
+        ></textarea>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="sel1" class="form-label">Select list (select one):</label>
+        <select class="form-select" id="sel1" name="sellist1">
+          <option value="">통신사 선택</option>
+          <option value="skt">SKT</option>
+          <option value="kt">KT</option>
+          <option value="lgt">LGT</option>
+          <option value="etc">알뜰폰</option>
+        </select>
+      </div>
+      <div class="mb-3 mt-3">
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            id="radio1"
+            name="optradio"
+            value="option1"            
+          />Option 1
+          <label class="form-check-label" for="radio1"></label>
+        </div>
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            id="radio2"
+            name="optradio"
+            value="option2"
+          />Option 2
+          <label class="form-check-label" for="radio2"></label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" name="optradio"/>Option 3
+          <label class="form-check-label"></label>
+        </div>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="customRange" class="form-label">Custom range</label>
+        <input type="range" class="form-range" id="customRange" name="points" />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <script>
+        document.querySelector('button[type=submit]')
+        .addEventListener('click', function(e) {
+            e.preventDefault(); // 기본 속성 막기
+            let emailVal = document.getElementById('email').value;
+            let pwdVal = document.querySelector('#pwd').value;
+            let textVal = document.forms.exForm.text.value;
+            let pointVal = document.forms['exForm']['points'].value;
+
+            let radioCheckVal = document.querySelectorAll('input[type=radio]');
+
+            let radioCheckedValue = document.querySelector('input[type=radio]:checked');
+            console.log(radioCheckedValue.value);
+
+            //radio 버튼은 택일일 가능성이 높으므로 break 가 필요
+            for (let i = 0; i < radioCheckVal.length; i++) {                
+                if (radioCheckVal[i].checked) {
+                    console.log(radioCheckVal[i].value);
+                    break;
+                }                
+            }
+            // checkbox는 다중선택이므로 값을 저장할 집합 데이터가 필요.
+            // 단, break는 사용하지 않는다
+
+            // select의 옵션 중 선택되어 있는 것의 값을 알고 싶다면?
+            const selectTag = document.getElementById('sel1');
+            let selIdx = selectTag.options.selectedIndex;
+            let selValue = selectTag.options[selIdx].value;
+            console.log(selValue);
+
+            const selectOption = document.querySelector('select > option:checked');
+            console.log(selectOption.value);
+        });
+    </script>
+  </body>
+</html>
