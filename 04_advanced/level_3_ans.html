@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Javascript Level 3 Test</title>
+<style>
+    td {
+        width: 75px;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+    <h1>호텔 관리 프로그램</h1>
+    <ol>
+        <li>n개의 층과 1개 층마다 m개의 호실 있는 호텔을 초기화</li>
+        <li>메뉴 > 1:객실현황전체보기 / 2:입실 / 3:퇴실 / 4:개별룸 정보 보기 / etc:종료</li>
+        <li>입실정보 => 입실할 방 번호, 이름, 입실 날짜와 시간</li>
+        <li>객실현황전체보기 => 입실가능 or 사용중 출력</li>
+        <li>퇴실 => 퇴실할 방 번호</li>
+    </ol>
+    <hr>
+    <div id="initArea">
+        <button type="button" id="initHotel">건설할 호텔 정보 입력 하기</button>
+    </div>
+    <div id="menuArea" style="display: none;">
+        <h1>호텔 관리 메뉴</h1>
+        <ol>
+            <li>객실 현황 전체 보기 <button type="button" id="getList">보기</button></li>
+            <li>입실 하기 <button type="button" id="checkIn">입실</button></li>
+            <li>퇴실 하기 <button type="button" id="checkOut">퇴실</button></li>
+            <li>개별룸 정보 보기 <button type="button" id="getDetail">보기</button></li>
+        </ol>
+    </div>
+    <hr>
+    <div id="printArea"></div>
+    <hr>
+    <div id="checkArea"></div>
+<script>
+    class Room {
+        constructor(rno=0, avail=true, user='', dateTime=''){
+            this.rno = rno;
+            this.avail = avail;
+            this.user = user;
+            this.dateTime = dateTime;
+        }
+        getRoomNo(){
+            return this.rno;
+        }
+        isAvailable(){
+            return this.avail;
+        }
+        checkIn(user) {
+            this.user = user;
+            this.avail = false;
+            this.dateTime = new Date();
+        }
+        checkOut(){
+            this.avail = true;
+            this.user = '';
+            this.dateTime = new Date();
+        }
+        getRoomDetail(){
+            return [this.rno, this.avail, this.user, this.dateTime];
+        }
+    }
+    // 호텔 초기화 및 구조 가져오기
+    const getHotelArch = (function () {
+        const rooms = [];
+        return function (f=0, r=0) {
+            if (f > 0 && r > 0) {
+                for (let i = 0; i < f; i++) {
+                    rooms.push([]);
+                    for (let j = 0; j < r; j++) {
+                        rooms[i].push(new Room(`${i+1}${j < 9 ? '0'+(j+1) : j+1}`));                        
+                    }                    
+                }
+            }
+            return rooms;    
+        }
+    })();
+    // 호텔을 건설하자 => 층수와 각 층의 방 갯수 입력
+    document.getElementById('initHotel').addEventListener('click', ()=>{
+        let str = '';
+        str += 'Floor count : <input type="number" id="floors" value="5">  ';
+        str += 'Room count per floor : <input type="number" id="rooms" value="10"> ';
+        str += '<button type="button" id="initBtn">호텔 만들기</button>';
+        document.getElementById('initArea').innerHTML += str;
+    });
+    // 개별룸 정보 보기 방번호 입력란 만들기
+    document.getElementById('getDetail').addEventListener('click', ()=>{
+        document.getElementById('checkArea').innerHTML = '';
+        let str = '조회할 방번호 > <input type="number" id="roomNo"> '; 
+        str += '<button type="button" id="roomDetail">확인</button>';
+        document.getElementById('checkArea').innerHTML += str;
+    });
+    // 퇴실 정보 입력란 만들기
+    document.getElementById('checkOut').addEventListener('click', ()=>{
+        document.getElementById('checkArea').innerHTML = '';
+        let str = '퇴실할 방번호 > <input type="number" id="roomNo"> '; 
+        str += '<button type="button" id="checkOutConfirm">확인</button>';
+        document.getElementById('checkArea').innerHTML += str;
+    });
+    // 입실 정보 입력란 만들기
+    document.getElementById('checkIn').addEventListener('click', ()=>{
+        document.getElementById('checkArea').innerHTML = '';
+        let str = '입실할 방번호 > <input type="number" id="roomNo"><br>';
+        str += '사용자 이름 > <input type="text" id="user">';
+        str += '<button type="button" id="checkInConfirm">확인</button>';
+        document.getElementById('checkArea').innerHTML += str;
+    });
+    // 객실 현황 전체 보기
+    document.getElementById('getList').addEventListener('click', ()=>{
+        let hotel = getHotelArch();
+        // console.log(hotel);
+        let str ='<table border="1">';
+        hotel.forEach(rooms => {
+            str += '<tr>';
+            rooms.forEach(room => {
+                let rno = room.getRoomNo();
+                let avail = room.isAvailable();
+                str += `<td>${rno}<br>${avail?'입실가능':'사용중'}</td>`;
+            });
+            str += '</tr>';
+        });
+        str += '</table>';
+        document.getElementById('printArea').innerHTML = str;
+    });
+    // 동적으로 생성된 태그들에게 이벤트 부여하기
+    document.addEventListener('click', function (e) {
+       // 호텔만들기
+       if(e.target.id == 'initBtn') {
+           let floors = document.getElementById('floors').value;
+           let rooms = document.getElementById('rooms').value;
+        // const hotel = getHotelArch(floors, rooms);
+        // console.log(hotel);
+           getHotelArch(floors, rooms);
+           document.getElementById('initArea').style.display = 'none';
+           document.getElementById('menuArea').style.display = 'block';
+       }
+       // 조회할 정보 값 받아서 조회 후 출력하기
+       if(e.target.id == 'roomDetail'){
+        let [floor, room, hotel] = getCheckInfo();
+        
+        let str = '<ul>';        
+        hotel[floor][room].getRoomDetail().forEach(elem =>{
+            str += `<li>${elem}</li>`;
+        });
+        str += '</ul>';
+        document.getElementById('checkArea').innerHTML = str;
+       }
+       // 퇴실 정보값 받아서 입실 하기
+       if (e.target.id == 'checkOutConfirm'){
+            let [floor, room, hotel] = getCheckInfo();
+
+           if(hotel[floor][room].isAvailable()){
+            alert('빈 객실입니다!\n사용중인 객실을 지정하세요~');
+           }else{
+            hotel[floor][room].checkOut();
+           }
+           document.getElementById('checkArea').innerHTML = '';
+           document.getElementById('getList').click();           
+       }
+       // 입실 정보값 받아서 입실 하기
+       if(e.target.id == 'checkInConfirm') {
+           let [floor, room, hotel] = getCheckInfo();
+           let user = document.getElementById('user').value;
+           
+           if(hotel[floor][room].isAvailable()){
+            hotel[floor][room].checkIn(user);
+           }else {
+             alert('현재 사용중인 객실입니다!\n다른 객실을 이용해 주세요~');
+           }
+           document.getElementById('checkArea').innerHTML = '';
+           document.getElementById('getList').click();
+       }
+    });
+    function getCheckInfo() {
+        let roomNo = document.getElementById('roomNo').value;
+        let floor = parseInt(roomNo.length > 3 ? roomNo.substr(0,2) : roomNo[0])-1;
+        let room = parseInt(roomNo.length > 3 ? roomNo.substring(2) : roomNo.substring(1))-1;
+        let hotel = getHotelArch();
+        return [floor, room , hotel];
+    }
+</script>
+</body>
+</html>

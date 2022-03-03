@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Javascript Level 2 Test</title>
+</head>
+<body>
+<h1>점수 / 등급 / 랭킹 출력하기</h1>
+<ol>
+    <li>6개의 과목 점수와 인원 수 입력 받기</li>
+    <li>합계, 평균, 등급 연산하여 합계로 순위를 결정</li>
+    <li>등급은 (A[90이상], B[80이상], C[70이상], D[60이상], F[60미만])</li>
+    <li>가장 높은 합계점수를 받은 사람부터 출력</li>
+</ol>
+<hr>
+인원 수 입력 > <input type="number" id="students">
+<button type="button" id="resultBtn">결과출력</button>
+<hr>
+<div id="resultArea"></div>
+<script>
+    document.getElementById('resultBtn').addEventListener('click', ()=>{
+        let students = parseInt(document.getElementById('students').value);
+        document.getElementById('resultArea').innerHTML = '';
+
+        const scores_of_students = makeRandomScores(students);
+        const total_scores = calcTotal(scores_of_students);
+        const averages = calcAverage(total_scores);
+        const grades = calcGrade(averages);
+        
+        const students_infos = makeStudentInfo(scores_of_students, total_scores, averages, grades);
+        
+        printResult(students_infos);
+    });
+    // 총점이 높은 학생부터 출력하는 함수
+    function printResult(std_infos){
+        std_infos.sort((a, b) => b.total - a.total);
+        let str = '<ol>';
+        std_infos.forEach(std_obj => {
+            str += '<li>';
+            for (let key in std_obj) {
+                str += `${key}: ${std_obj[key]} \t`;                    
+            }
+            str += '</li>';
+        });
+        str += '</ol>';
+        document.getElementById('resultArea').innerHTML = str;
+    }
+
+    // 학생 객체를 만들어 모두 배열에 저장하는 함수
+    function makeStudentInfo(std_scores, std_totals, std_avgs, std_grades) {
+        let infos = [];
+        std_scores.forEach((scoreArr, idx) => {
+            let std_obj = {};
+            std_obj.total = std_totals[idx];
+            std_obj.grade = std_grades[idx];
+            std_obj.score = scoreArr;
+            std_obj.avg = std_avgs[idx];
+            infos.push(std_obj);
+        });
+        console.log(infos);
+        return infos;
+    }
+    // 각 학생들의 등급을 만들어내는 함수
+    function calcGrade(std_avgs) {
+        let grades = [];
+        std_avgs.forEach(avg => {
+            grades.push(avg >= 90 ? 'A' : avg >= 80 ? 'B' : avg >= 70 ? 'C' : avg >= 60 ? 'D' : 'F');
+        });
+        // console.log(grades);
+        return grades;
+    }
+    // 각 학생들의 평균을 만들어내는 함수
+    function calcAverage(std_totals) {
+        const avgs = std_totals.map((x) => x / 6);
+        // console.log(avgs);
+        return avgs;
+    }
+    // 각 학생들의 점수의 총점을 만들어내는 함수
+    function calcTotal(std_scores) {
+        let totals = [];
+        std_scores.forEach(score_arr => {
+            totals.push(score_arr.reduce((a, b)=>{return a + b}, 0));
+        });
+        // console.log(totals);
+        return totals;
+    }
+    // 랜덤으로 학생들의 점수를 만들어내는 함수
+    function makeRandomScores(stds) {
+        let std_scores = [];
+        for (let i = 0; i < stds; i++) {
+            let scores = [];
+            for (let j = 0; j < 6; j++) {
+                let score = Math.floor(Math.random()*51) + 50;
+                scores.push(score);
+            }
+            std_scores.push(scores);
+        }
+        // console.log(std_scores);
+        return std_scores;
+    }
+</script>
+</body>
+</html>
