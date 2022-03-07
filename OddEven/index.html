@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Even</title>
+<link rel="stylesheet" href="oddeven.css">
+</head>
+<body>
+    <div class="container">
+        
+    </div>
+    <div class="buttons">
+        <button id="start">숫자 생성</button>
+        <button id="oddBtn">홀수 선택</button>
+        <button id="evenBtn">짝수 선택</button>
+    </div>
+<script>
+    document.getElementById('start').addEventListener('click', makeRandomNumber);
+    document.getElementById('oddBtn').addEventListener('click', ()=>{
+        document.querySelectorAll('.card').forEach(elem => {
+            elem.textContent % 2 != 0 
+            ? elem.classList.add('selected') : elem.classList.remove('selected');
+        });
+    });
+    document.getElementById('evenBtn').addEventListener('click', ()=>{
+        document.querySelectorAll('.card').forEach(elem => {
+           elem.textContent % 2 == 0 
+           ? elem.classList.add('selected') : elem.classList.remove('selected');
+        });
+    });
+    function makeRandomNumber() {
+        let rnums = new Set();
+        while (rnums.size < 24) {
+            let rnum = Math.floor(Math.random()*100) + 1;
+            rnums.add(rnum);
+        }
+        console.log(rnums);
+        makeCardBox(rnums);
+    }
+    function makeCardBox(rnums) {
+        let div_container = document.querySelector('.container');
+        div_container.innerHTML = '';
+        rnums.forEach(elem => {
+            let div_card = document.createElement('div');
+            div_card.classList.add('card');
+            div_card.innerText = elem;
+            div_container.appendChild(div_card);
+        });
+        let div_clear = document.createElement('div');
+        div_clear.style.clear = 'both';
+        div_container.appendChild(div_clear);
+    }
+</script>
+</body>
+</html>

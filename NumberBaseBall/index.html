@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>숫자야구게임</title>
+<style>
+    button {
+        margin-right: 50px;
+    }
+</style>
+</head>
+<body>
+<h1>숫자야구 규칙</h1>
+<ol>
+    <li>1~9까지의 숫자 3개를 중복되지 않게 랜덤으로 정한다 [6, 2, 9]</li> 
+    <li>상대방은 이 3개의 숫자를 정확히 맞추는 게임</li>
+    <li>스트라이크(S) : 숫자 값과 자리수가 일치할 때 [6, 1, 4] => 1S</li>
+    <li>볼(B) : 숫자 값은 맞췄지만 자리수가 일치하지 않을때 [9, 1, 6] => 2B</li>
+    <li>아웃(OUT) : 숫자 값이 모두 일치하지 않을때 [1, 3, 7] => OUT</li>
+    <li>[9, 2, 4] => 1S 1B</li>
+</ol>
+<ul>
+    <li>형식은 자유!</li>
+    <li>게임 진행 상황은 기록되어야 할 것</li>
+    <li>(optional) 게임 소요 시간 기록</li>
+    <li>(optional) 시도 횟수 기록</li>
+    <li>(optional) 게임 완료시간, 게임 소요 시간 기록과 시도 횟수 기록을 객체로 저장하여</li>
+    <li>(optional) 그 객체를 배열로 저장</li>    
+</ul>
+<button type="button" id="start">야구 게임 시작</button>
+<button type="button" id="recBtn">게임 기록 조회</button><hr>
+숫자예측 입력 : <input type="text" id="predict">
+<ol id="history">
+    <li>여기에 기록이 출력됩니다</li>
+</ol>
+<h3 id="playtime"></h3>
+<hr>
+<div id="recordArea"></div>
+<script>
+    let records = [];
+    let num_arr;
+    let time_arr;
+    function getCurrentTime() {
+        let now = new Date().getTime();
+        console.log(now); // milliseconds
+        time_arr.push(now);
+        console.log(time_arr);
+    }
+    document.getElementById('start').addEventListener('click', startGame);
+    document.getElementById('recBtn').addEventListener('click',printRecords);
+    function printRecords() {
+        let recordArea = document.getElementById('recordArea');
+        records.forEach(elemObj => {
+            let str = '<ul>';
+                for (let key in elemObj) {
+                    str += `<li>${key} : ${elemObj[key]}</li>`;
+                }
+                str += '</ul>'
+            recordArea.innerHTML += str;
+        });
+   }
+    function startGame() {        
+        let rnum_set = new Set();
+        while (rnum_set.size < 3){
+            let rnum = Math.floor(Math.random()*9)+1;
+            rnum_set.add(rnum);
+        }
+        // console.log(rnum_set);
+        // console.log(rnum_set[0], rnum_set[1], rnum_set[2]);
+        num_arr = [...rnum_set];
+        console.log(num_arr);
+        document.getElementById('predict').value = "";
+        document.getElementById('history').innerHTML = "";
+        document.getElementById('playtime').innerHTML = "";
+        time_arr = [];
+        getCurrentTime();
+    }
+    function saveRecordObject(rt, pt, pc) {
+        let recObj = {};
+        recObj.recDate = rt;
+        recObj.playTime = pt;
+        recObj.playCount = pc;
+        records.push(recObj);
+        console.log(records);
+    }
+    function printHistory(nums, msg) {
+        let ol = document.getElementById('history');
+        let li = document.createElement('li');
+        li.innerText = `${nums} -> ${msg}`;
+        ol.appendChild(li);
+        document.getElementById('predict').value = "";
+        document.getElementById('predict').focus();
+        if (msg == '게임종료') {
+            let h3 = document.getElementById('playtime');
+            let playTime = (time_arr[1] - time_arr[0]) / 1000;
+            h3.innerText = `${playTime} Sec.`;
+            let playCount = ol.childElementCount; // ol.childNodes.length
+            let recTime = new Date();
+            console.log(playCount);
+            saveRecordObject(recTime, playTime, playCount);
+        }
+    }
+    function compareNums(pArr, nArr) {
+        let strike = 0;
+        let ball = 0;
+
+        for (let i = 0; i < nArr.length; i++) {
+            for (let j = 0; j < pArr.length; j++) {                
+                if(nArr[i] == pArr[j] && i == j){
+                    strike++;
+                } else if (nArr[i] == pArr[j] && i != j){
+                    ball++;
+                }
+            }
+        }
+        let msg = '';
+        if (strike==3) {
+            msg = '게임종료';
+            getCurrentTime();
+        } else if(strike==0 && ball==0) {
+            msg = "OUT";
+        } else {
+            msg = `${strike}S ${ball}B`;
+        }   
+        printHistory(pArr.toString(), msg);
+
+        // console.log(strike==0 && ball==0 ? "OUT": strike==3 ? "게임종료":"");
+        // console.log(pArr.toString(), ":", `${strike}S ${ball}B`);
+    }
+    document.getElementById('predict').addEventListener('input', validation);
+    function validation() {
+        let pVal = document.getElementById('predict').value;
+        // console.log('check', pVal);
+        if (pVal.length == 3) {
+            let predict = pVal.split("");
+            console.log(predict);
+            compareNums(predict, num_arr);
+        }
+    }
+</script>
+</body>
+</html>
