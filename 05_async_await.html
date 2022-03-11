@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Async Await</title>
+  </head>
+  <body>
+    <h1>Async와 Await를 더 효율적으로 사용하기 위한 기법</h1>
+    <ul>
+      <li>asnyc 키워드를 장착한 함수는 순차 진행 로직의 대상이 된다</li>
+      <li>
+        await 키워드를 장착한 코드는 이전 프로세스가 모두 완료 될 때가지
+        대기해야 한다
+      </li>
+      <li>이전 프로세스가 모두 완료 되면 자신을 실행하고 다음 await에게</li>
+      <li>너가 다음 순서니까 기다려! 라는 메세지를 전달하는 방식이다</li>
+    </ul>
+    <button type="button" id="btn">키워드를 사용한 제어</button>
+    <script>
+      document.getElementById("btn").addEventListener("click", () => {
+        async function fetchAndAwait(params) {
+          try {
+            const resp = await fetch(
+              "https://jsonplaceholder.typicode.com/todosss/1"
+            );
+            const result = await resp.text();
+            console.log(result);
+          } catch (error) {
+              console.log(error);
+          } finally {
+              console.log('finish async');
+          }
+        }
+        fetchAndAwait();
+        console.log('~~~~~~오늘은 여기까지~~~~~');
+      });
+    </script>
+  </body>
+</html>

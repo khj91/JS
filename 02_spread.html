@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>배열, 객체 spreading</title>
+</head>
+<body>
+<h1>자바스크립트 destructing, spread</h1>
+<ul>
+    <li>ES6에서 배열만 spread가 가능했지만 ES2018 부터는 객체도 가능</li>
+    <li>배열과 객체의 데이터를 펼치는 기능을 통해 쉽게 선언 및 생성 가능</li>
+    <li>... 이라는 spread 연산자를 사용하여 배열과 객체를 복사 할 수 있다</li>
+    <li>디스트럭팅(destructing)은 비슷한 것처럼 보이지만 분해 후 선언 및 초기화라고 할 수 있음</li>
+</ul>
+<script>
+    // destructing
+    let arr_1 = ['k', 'b', 'l', 'u', 'j'];
+    let [kim, bae, lim, un, jung, sun='s'] = arr_1;
+    console.log(kim, bae, lim, un, jung, sun);
+
+    let [park, oh, ...other] = arr_1;
+    console.log(park, oh, other);
+
+    // data value exchange (데이터 값 교환)
+    let k5 = 'hyundae';
+    let genesis = 'kia';
+
+    [k5, genesis] = [genesis, k5];
+    console.log(k5, genesis);
+
+    const laptop = {
+        title : 'Apple Macbook Pro',
+        price : 1790000,
+        cpu : 'M1',
+        ram : '8GB',
+        ssd : '256GB',
+        display : 'Retina True Tone',
+        touchBar : true,
+        gpu: '8core'
+    };
+
+    let {cpu, ram} = laptop;
+    console.log(cpu, ram);
+
+    let {display, thunderbolt=2} = laptop;
+    console.log(display, thunderbolt);
+
+    let {touchBar, ...etc} = laptop;
+    console.log(touchBar, etc);
+
+    let m1 = {
+        model : 'Apple Macbook Air',
+        won : 1400000,
+        processor : 'i5',
+        memory: '8GB',
+        storage: '128GB',
+        pixel: 'RETINA',
+        bandarea: false,
+        core : '4core',
+        'serial-number': 'esfungg2564'
+    };
+    let {model: gen, 'serial-number': serialNumber} = m1;
+    console.log(gen, serialNumber);
+
+    let propName = 'won';
+    let {[propName] : kw} = m1;
+    console.log(kw);
+
+    let old_arr = ['kim', 'lee', 'park'];
+    let new_obj = {...old_arr};
+    console.log(new_obj);
+
+    let new_obj2 = {};
+    for (let i = 0; i < old_arr.length; i++) {
+        new_obj2[i.toString()] = old_arr[i];
+    }
+    console.log(new_obj2);
+</script>
+</body>
+</html>
